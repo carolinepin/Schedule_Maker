@@ -1,5 +1,6 @@
 package sample;
 
+import helper.CountryQuery;
 import helper.JDBC;
 import sample.Controller;
 
@@ -8,6 +9,8 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
+
+import java.sql.SQLException;
 
 public class Main extends Application {
 
@@ -20,10 +23,22 @@ public class Main extends Application {
     }
 
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws SQLException {
         JDBC.openConnection();
+        int rowsAffected = 0;
+        //rowsAffected = CountryQuery.insert("Wakanda");
+        //rowsAffected = CountryQuery.update(5, "North Pole");
+        //rowsAffected = CountryQuery.delete(4);
 
+        //if (rowsAffected > 0) {
+            //System.out.println("Insert Successful!");
 
+        //}
+        //else {
+            //System.out.println("Insert Failed!");
+        //}
+
+        CountryQuery.select(3);
 
 
         launch(args);
