@@ -2,25 +2,44 @@
 
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.layout.ColumnConstraints?>
-<?import javafx.scene.layout.GridPane?>
-<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.text.Font?>
 
-<GridPane alignment="center" hgap="10" vgap="10" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.Controller">
-   <columnConstraints>
-      <ColumnConstraints />
-   </columnConstraints>
-   <rowConstraints>
-      <RowConstraints />
-   </rowConstraints>
+
+<HBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="402.0" prefWidth="611.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1"
+      fx:controller="sample.Controller">
    <children>
-      <AnchorPane prefHeight="200.0" prefWidth="200.0">
+      <AnchorPane prefHeight="313.0" prefWidth="249.0" style="-fx-background-color: #7A9AAB;">
          <children>
-            <Button layoutX="74.0" layoutY="75.0" mnemonicParsing="false" text="TestBut" />
-            <Label layoutX="50.0" layoutY="14.0" text="Testing GitHub" />
-            <Button layoutX="74.0" layoutY="121.0" mnemonicParsing="false" onAction="#showMe" text="Show Countries" />
+            <Label layoutX="50.0" layoutY="76.0" text="Placeholder For Logo">
+               <font>
+                  <Font name="System Bold" size="16.0" />
+               </font>
+            </Label>
+         </children>
+      </AnchorPane>
+      <AnchorPane prefHeight="402.0" prefWidth="364.0">
+         <children>
+            <Label layoutX="37.0" layoutY="135.0" text="Username:">
+               <font>
+                  <Font size="18.0" />
+               </font>
+            </Label>
+            <Label layoutX="37.0" layoutY="176.0" text="Password: ">
+               <font>
+                  <Font size="18.0" />
+               </font>
+            </Label>
+            <TextField fx:id="tf_username" layoutX="139.0" layoutY="136.0" promptText="Username" />
+            <TextField fx:id="tf_password" layoutX="139.0" layoutY="177.0" promptText="Password" />
+            <Button fx:id="button_loggin" layoutX="139.0" layoutY="242.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="149.0" text="Login">
+               <font>
+                  <Font size="16.0" />
+               </font>
+            </Button>
          </children>
       </AnchorPane>
    </children>
-</GridPane>
+</HBox>

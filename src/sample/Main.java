@@ -12,6 +12,18 @@ import javafx.stage.Stage;
 
 import java.sql.SQLException;
 
+//<a href="https://www.vecteezy.com/free-vector/cloud">Cloud Vectors by Vecteezy</a> cloud image for login
+//color pallet
+//42758E blue
+//7A9AAB light blue
+//F1EDEC off white
+//E9B28C peach
+//B55434 terracotta orange
+
+//611B14 red/blood orange
+//1D2218 dark forest green
+//98BA9D chill mint green
+
 public class Main extends Application {
 
     @Override
