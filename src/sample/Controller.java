@@ -6,7 +6,7 @@ import java.util.ResourceBundle;
 
 import DBAccess.DBCountries;
 import Models.Country;
-import helper.Singleton;
+
 import javafx.collections.ObservableList;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
@@ -23,7 +23,7 @@ public class Controller implements Initializable {
     public TableColumn nameCol;
     public TableView dataTable;
 
-    Singleton data = Singleton.getInstance();
+
 
     @FXML
     private Button button_loggin;
@@ -38,6 +38,8 @@ public class Controller implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle){
         System.out.println("HelloTutorial");
+
+
         button_loggin.setOnAction(new EventHandler<ActionEvent>() {
 
             @Override

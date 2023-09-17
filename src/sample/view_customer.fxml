@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.AnchorPane?>
+
+
+<AnchorPane xmlns="http://javafx.com/javafx"
+            xmlns:fx="http://javafx.com/fxml"
+            fx:controller="sample.ViewCustomer"
+            prefHeight="400.0" prefWidth="600.0">
+    <children>
+        <TableView fx:id="customerTable" layoutX="26.0" layoutY="6.0" prefHeight="259.0" prefWidth="358.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+            <columns>
+                <TableColumn fx:id="custID" prefWidth="75.0" text="Customer ID" />
+                <TableColumn fx:id="Name" prefWidth="75.0" text="Name" />
+                <TableColumn fx:id="Address" prefWidth="75.0" text="Address" />
+                <TableColumn fx:id="Postal_Code" prefWidth="75.0" text="Postal Code" />
+                <TableColumn fx:id="Phone" prefWidth="75.0" text="Phone" />
+                <TableColumn fx:id="CreatedDate" prefWidth="75.0" text="Created On" />
+                <TableColumn fx:id="CreatedBy" prefWidth="75.0" text="Created By" />
+                <TableColumn fx:id="UpdatedDate" prefWidth="75.0" text="Updated On" />
+                <TableColumn fx:id="UpdatedBy" prefWidth="75.0" text="Updated By" />
+            </columns>
+        </TableView>
+    </children>
+
+</AnchorPane>
+
+

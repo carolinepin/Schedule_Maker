@@ -3,6 +3,7 @@ package helper;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.time.LocalDateTime;
 
 public abstract class CountryQuery {
 
@@ -15,11 +16,12 @@ public abstract class CountryQuery {
 
     }
 
-    public static int update(int CountryId, String CountryName) throws SQLException {
-        String sql = "UPDATE COUNTRIES SET Country = ? WHERE Country_ID = ?";
+    public static int update(int CountryId, String CountryName, LocalDateTime Date ) throws SQLException {
+        String sql = "UPDATE COUNTRIES SET Country = ?, Create_Date = ? WHERE Country_ID = ?";
         PreparedStatement ps = JDBC.getConnection().prepareStatement(sql);
         ps.setString(1, CountryName);
-        ps.setInt(2, CountryId);
+        ps.setObject(2, Date);
+        ps.setInt(3, CountryId);
         int rowsAffected = ps.executeUpdate();
         return rowsAffected;
 
@@ -51,7 +53,8 @@ public abstract class CountryQuery {
         while (rs.next()){
             int countryID = rs.getInt("Country_ID");
             String CountryName = rs.getString("Country");
-            System.out.print("Country ID: " + countryID + "\t\t\t Country Name: " + CountryName + "\n");
+            LocalDateTime ldt = rs.getObject( "Create_Date", LocalDateTime.class ) ;
+            System.out.print("Country ID: " + countryID + "\t\t\t Country Name: " + CountryName + "\t\t\t CreateDate: " + ldt + "\n");
         }
     }
 }

@@ -1,7 +1,7 @@
 package sample;
 
 import helper.JDBC;
-import helper.Singleton;
+
 import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
@@ -16,7 +16,6 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 
 public class DBUtils {
-    Singleton data = Singleton.getInstance();
 
     public static void changeScene(ActionEvent event, String fxmlFile, String title, String username, String nextAppointment){
 
@@ -31,12 +30,13 @@ public class DBUtils {
             //System.out.println(fxmlFile);
             if (username != null && nextAppointment != null && fxmlFile.equals("loggedin.fxml")){               //for custom login page
                 //System.out.println("Trying to Log in");
-                LoggedInController loggedInController = loader.getController();
+                LoggedInController controllerForLogin = loader.getController();
+                controllerForLogin.setUserInformation(username, nextAppointment);
 
                 Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
                 stage.setTitle(title);
                 stage.setScene(new Scene(root, 600, 400));
-                loggedInController.setUserInformation(username, nextAppointment);
+
                 stage.show();
 
             }else {

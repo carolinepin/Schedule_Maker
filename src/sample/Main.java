@@ -11,6 +11,7 @@ import javafx.scene.Scene;
 import javafx.stage.Stage;
 
 import java.sql.SQLException;
+import java.time.*;
 
 //<a href="https://www.vecteezy.com/free-vector/cloud">Cloud Vectors by Vecteezy</a> cloud image for login
 //color pallet
@@ -39,8 +40,19 @@ public class Main extends Application {
         JDBC.openConnection();
         int rowsAffected = 0;
         //rowsAffected = CountryQuery.insert("Wakanda");
-        //rowsAffected = CountryQuery.update(5, "North Pole");
+
         //rowsAffected = CountryQuery.delete(4);
+        CountryQuery.select(5);
+        LocalDate myLD = LocalDate.of(2023,9,16);
+        LocalTime myLT = LocalTime.of(12,34,56);
+
+        LocalDateTime LDT = LocalDateTime.of(myLD,myLT);
+        ZonedDateTime now = ZonedDateTime.now();
+        System.out.println(now.toLocalDate() + " " + now.toLocalTime() + "the computer current time");
+        rowsAffected = CountryQuery.update(5, "North Pole",LDT);
+        System.out.println(rowsAffected);
+
+        //System.out.println(LDT.toLocalDate() + " " + LDT.toLocalTime() + ":" + LDT.toLocalTime().getSecond() );
 
         //if (rowsAffected > 0) {
             //System.out.println("Insert Successful!");
@@ -50,7 +62,7 @@ public class Main extends Application {
             //System.out.println("Insert Failed!");
         //}
 
-        CountryQuery.select(3);
+
 
 
         launch(args);
