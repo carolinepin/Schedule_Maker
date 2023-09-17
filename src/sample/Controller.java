@@ -1,10 +1,12 @@
 package sample;
 
 import java.net.URL;
+import java.sql.SQLException;
 import java.util.ResourceBundle;
 
 import DBAccess.DBCountries;
 import Models.Country;
+import helper.Singleton;
 import javafx.collections.ObservableList;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
@@ -13,14 +15,24 @@ import javafx.event.ActionEvent;
 import javafx.scene.control.Button;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import javafx.scene.control.TextField;
+import org.w3c.dom.Text;
 
 public class Controller implements Initializable {
     public TableColumn idCol;
     public TableColumn nameCol;
     public TableView dataTable;
 
+    Singleton data = Singleton.getInstance();
+
     @FXML
     private Button button_loggin;
+
+    @FXML
+    private TextField tf_username;
+
+    @FXML
+    private TextField tf_password;
 
 
     @Override
@@ -30,7 +42,12 @@ public class Controller implements Initializable {
 
             @Override
             public void handle(ActionEvent event) {
-                DBUtils.changeScene(event, "loggedin.fxml", "Logged In!", null, null);   //go back to login page
+                try {
+                    System.out.println(tf_username.getText());
+                    DBUtils.logginUser(event, tf_username.getText(), tf_password.getText());   //go back to login page
+                } catch (SQLException throwables) {
+                    throwables.printStackTrace();
+                }
 
 
             }

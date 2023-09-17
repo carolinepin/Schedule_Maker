@@ -1,5 +1,6 @@
 package sample;
 
+import helper.Singleton;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
@@ -11,8 +12,11 @@ import java.net.URL;
 import java.util.ResourceBundle;
 
 public class LoggedInController implements Initializable {
+
+    Singleton data = Singleton.getInstance();
+
     @FXML
-    private Button proceed_button;
+    Button proceed_button;
 
     @FXML
     Label label_welcome;
@@ -25,7 +29,7 @@ public class LoggedInController implements Initializable {
         proceed_button.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
-                DBUtils.changeScene(event, "sample.fxml", "Login!", null, null);   //go back to login page
+                DBUtils.changeScene(event, "sample.fxml", "Login!", null, "TESTING THIS");   //go back to login page
 
 
             }
