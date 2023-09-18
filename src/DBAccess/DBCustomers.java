@@ -13,7 +13,7 @@ import java.time.LocalDateTime;
 
 public class DBCustomers {
 
-    public static ObservableList<Customer> getAllCountries(){
+    public static ObservableList<Customer> getAllCustomers(){
         ObservableList<Customer> clist = FXCollections.observableArrayList(); //initilizes empty list of countries
 
         try{
@@ -46,4 +46,16 @@ public class DBCustomers {
 
         return clist;
     }
+
+    public static int update(int custID, String Name, String Addr, String Postal, String Phone) throws SQLException {
+        String sql = "UPDATE COUNTRIES SET Country = ?, Create_Date = ? WHERE Country_ID = ?";
+        PreparedStatement ps = JDBC.getConnection().prepareStatement(sql);
+        ps.setString(1, CountryName);
+        ps.setObject(2, Date);
+        ps.setInt(3, CountryId);
+        int rowsAffected = ps.executeUpdate();
+        return rowsAffected;
+
+    }
+
 }

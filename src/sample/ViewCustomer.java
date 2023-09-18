@@ -14,10 +14,9 @@ import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
+import javafx.scene.control.*;
+import javafx.scene.input.MouseEvent;
+import javafx.scene.text.Text;
 
 public class ViewCustomer implements Initializable {
 
@@ -55,11 +54,83 @@ public class ViewCustomer implements Initializable {
     @FXML
     private TableColumn<Customer, String> UpdatedBy;
 
+    @FXML
+    private Button addButton;
 
-    ObservableList<Customer> customerList = DBCustomers.getAllCountries();
+    @FXML
+    private TextField adrField;
+
+    @FXML
+    private TextField nameField;
+
+    @FXML
+    private TextField phoneField;
+
+    @FXML
+    private TextField postField;
+
+    @FXML
+    private Button reportButton;
+
+    @FXML
+    private Button updateButton;
+
+    @FXML
+    private Text displayID;
+
+    @FXML
+    private Button deleteButton;
+
+    private int index;
+
+
+
+    @FXML
+    void getItem(MouseEvent event) {
+
+        index = customerTable.getSelectionModel().getSelectedIndex();
+
+        if (index <= -1) {
+            return;
+        }
+
+        nameField.setText(Name.getCellData(index).toString());
+        adrField.setText(Address.getCellData(index).toString());
+        postField.setText(Postal_Code.getCellData(index).toString());
+        phoneField.setText(Phone.getCellData(index).toString());
+        displayID.setText(custID.getCellData(index).toString());
+
+        updateButton.setDisable(false);
+        deleteButton.setDisable(false);
+        addButton.setDisable(true);
+
+
+    }
+
+    void clearSelection(){
+        nameField.clear();
+        adrField.clear();
+        postField.clear();
+        phoneField.clear();
+        displayID.setText("Unassigned");
+
+        addButton.setDisable(false);
+        updateButton.setDisable(true);
+        deleteButton.setDisable(true);
+    }
+
+    void updateCustomer(){
+
+    }
+
+
+    ObservableList<Customer> customerList = DBCustomers.getAllCustomers();
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
+
+        deleteButton.setDisable(true);
+        updateButton.setDisable(true);
         Name.setCellValueFactory(cellData -> {
             return new ReadOnlyStringWrapper(cellData.getValue().getName());
         });

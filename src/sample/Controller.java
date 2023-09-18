@@ -19,9 +19,7 @@ import javafx.scene.control.TextField;
 import org.w3c.dom.Text;
 
 public class Controller implements Initializable {
-    public TableColumn idCol;
-    public TableColumn nameCol;
-    public TableView dataTable;
+
 
 
 
