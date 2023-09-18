@@ -14,11 +14,15 @@ import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 
 public class ViewCustomer implements Initializable {
+
+    @FXML
+    private Button appointButton;
 
     @FXML
     private TableView<Customer> customerTable;
@@ -68,6 +72,11 @@ public class ViewCustomer implements Initializable {
         Postal_Code.setCellValueFactory(cellData -> {
             return new ReadOnlyObjectWrapper(cellData.getValue().getZip());
         });
+
+        Phone.setCellValueFactory(cellData -> {
+            return new ReadOnlyStringWrapper(cellData.getValue().getPhone());
+        });
+
         CreatedDate.setCellValueFactory(cellData -> {
             return new ReadOnlyObjectWrapper(cellData.getValue().getCT());
         });
@@ -98,6 +107,10 @@ public class ViewCustomer implements Initializable {
 
          */
 
+    }
+
+    public void viewAppointment(ActionEvent event){
+        DBUtils.changeScene(event, "view_appointments.fxml", "See Appointments", null, null);
     }
 
 

@@ -37,7 +37,7 @@ public class Controller implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle){
-        System.out.println("HelloTutorial");
+
 
 
         button_loggin.setOnAction(new EventHandler<ActionEvent>() {
