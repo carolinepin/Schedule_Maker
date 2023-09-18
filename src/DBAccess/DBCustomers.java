@@ -10,6 +10,8 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.time.LocalDateTime;
+import java.time.ZoneId;
+import java.time.ZonedDateTime;
 
 public class DBCustomers {
 
@@ -48,11 +50,22 @@ public class DBCustomers {
     }
 
     public static int update(int custID, String Name, String Addr, String Postal, String Phone) throws SQLException {
-        String sql = "UPDATE COUNTRIES SET Country = ?, Create_Date = ? WHERE Country_ID = ?";
+        String sql = "UPDATE CUSTOMERS SET Customer_Name = ?, Address = ? , Postal_Code = ? , Phone = ? , Last_Update = ?, Last_Updated_By = ? WHERE Customer_ID = ?";
         PreparedStatement ps = JDBC.getConnection().prepareStatement(sql);
-        ps.setString(1, CountryName);
-        ps.setObject(2, Date);
-        ps.setInt(3, CountryId);
+        LocalDateTime timestamp = LocalDateTime.now();
+        ZoneId utcZoneId = ZoneId.of("UTC");
+        ZoneId myZoneId = ZoneId.systemDefault();
+        ZonedDateTime myZDT = ZonedDateTime.of(timestamp, myZoneId);
+        ZonedDateTime utcZDT = ZonedDateTime.ofInstant(myZDT.toInstant(), utcZoneId);
+
+
+        ps.setString(1, Name);
+        ps.setString(2, Addr);
+        ps.setString(3, Postal);
+        ps.setString(4, Phone);
+        ps.setObject(5, utcZDT);
+        ps.setString(6, "admin");  //NEED TO CHANGE, MUST ACCEPT USERNAME IN ARGUMENT TO ADD HERE
+        ps.setInt(7, custID);
         int rowsAffected = ps.executeUpdate();
         return rowsAffected;
 

@@ -1,6 +1,7 @@
 package sample;
 
 import java.net.URL;
+import java.sql.SQLException;
 import java.time.LocalDateTime;
 import java.util.ResourceBundle;
 
@@ -85,43 +86,7 @@ public class ViewCustomer implements Initializable {
 
 
 
-    @FXML
-    void getItem(MouseEvent event) {
 
-        index = customerTable.getSelectionModel().getSelectedIndex();
-
-        if (index <= -1) {
-            return;
-        }
-
-        nameField.setText(Name.getCellData(index).toString());
-        adrField.setText(Address.getCellData(index).toString());
-        postField.setText(Postal_Code.getCellData(index).toString());
-        phoneField.setText(Phone.getCellData(index).toString());
-        displayID.setText(custID.getCellData(index).toString());
-
-        updateButton.setDisable(false);
-        deleteButton.setDisable(false);
-        addButton.setDisable(true);
-
-
-    }
-
-    void clearSelection(){
-        nameField.clear();
-        adrField.clear();
-        postField.clear();
-        phoneField.clear();
-        displayID.setText("Unassigned");
-
-        addButton.setDisable(false);
-        updateButton.setDisable(true);
-        deleteButton.setDisable(true);
-    }
-
-    void updateCustomer(){
-
-    }
 
 
     ObservableList<Customer> customerList = DBCustomers.getAllCustomers();
@@ -164,24 +129,61 @@ public class ViewCustomer implements Initializable {
         customerTable.getItems().addAll(customerList);
 
         LocalDateTime now = LocalDateTime.now();
-        /*
-        //Option 1: add one object at a time
-        Fruit apple = new Fruit("apple", 10, now.plusDays(1));
-        fruitTable.getItems().add(apple);
-        Fruit banana = new Fruit("banana", 20, now.plusWeeks(1));
-        fruitTable.getItems().add(banana);
 
-        //Option 2: add an entire list at once
-        fruitList.add(apple);
-        fruitList.add(banana);
-        fruitTable.getItems().addAll(fruitList);
-
-         */
 
     }
 
     public void viewAppointment(ActionEvent event){
         DBUtils.changeScene(event, "view_appointments.fxml", "See Appointments", null, null);
+    }
+
+    @FXML
+    void getItem(MouseEvent event) {
+
+        index = customerTable.getSelectionModel().getSelectedIndex();
+
+        if (index <= -1) {
+            return;
+        }
+
+        nameField.setText(Name.getCellData(index).toString());
+        adrField.setText(Address.getCellData(index).toString());
+        postField.setText(Postal_Code.getCellData(index).toString());
+        phoneField.setText(Phone.getCellData(index).toString());
+        displayID.setText(custID.getCellData(index).toString());
+
+        updateButton.setDisable(false);
+        deleteButton.setDisable(false);
+        addButton.setDisable(true);
+
+
+    }
+
+
+    @FXML
+    void clearSelection(ActionEvent event){
+        nameField.clear();
+        adrField.clear();
+        postField.clear();
+        phoneField.clear();
+        displayID.setText("Unassigned");
+
+        addButton.setDisable(false);
+        updateButton.setDisable(true);
+        deleteButton.setDisable(true);
+    }
+
+    @FXML
+    void updateCustomer(ActionEvent event) throws SQLException {
+        int ra = DBCustomers.update(custID.getCellData(index), nameField.getText(),
+                adrField.getText(), postField.getText(), phoneField.getText());
+        System.out.println("Updated these many lines" + ra);
+
+        customerList = DBCustomers.getAllCustomers();
+        customerTable.getItems().clear();
+        customerTable.getItems().addAll(customerList);
+
+
     }
 
 
