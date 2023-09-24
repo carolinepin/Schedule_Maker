@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
@@ -9,7 +10,7 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.text.Text?>
 
-<HBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="572.0" prefWidth="841.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.ViewCustomer">
+<HBox maxHeight="570.0" maxWidth="840.0" minHeight="570.0" minWidth="840.0" prefHeight="572.0" prefWidth="841.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.ViewCustomer">
     <children>
     <AnchorPane prefHeight="572.0" prefWidth="678.0">
     <children>
@@ -31,16 +32,20 @@
             <TextField fx:id="nameField" layoutX="184.0" layoutY="368.0" />
             <TextField fx:id="adrField" layoutX="184.0" layoutY="406.0" />
             <Label layoutX="123.0" layoutY="410.0" text="Address:" />
-            <Label layoutX="102.0" layoutY="453.0" text="Postal Code:" />
-            <Label layoutX="81.0" layoutY="494.0" text="Phone Number:" />
-            <TextField fx:id="postField" layoutX="184.0" layoutY="449.0" />
-            <TextField fx:id="phoneField" layoutX="184.0" layoutY="490.0" />
-            <Button fx:id="addButton" layoutX="379.0" layoutY="318.0" mnemonicParsing="false" text="Add" />
+            <Label layoutX="103.0" layoutY="499.0" text="Postal Code:" />
+            <Label layoutX="81.0" layoutY="526.0" text="Phone Number:" />
+            <TextField fx:id="postField" layoutX="184.0" layoutY="495.0" />
+            <TextField fx:id="phoneField" layoutX="184.0" layoutY="522.0" />
+            <Button fx:id="addButton" layoutX="379.0" layoutY="318.0" mnemonicParsing="false" onAction="#addCustomer" text="Add" />
             <Button fx:id="updateButton" layoutX="568.0" layoutY="377.0" mnemonicParsing="false" onAction="#updateCustomer" text="Update" />
             <Label layoutX="101.0" layoutY="322.0" text="Customer ID:" />
             <Text fx:id="displayID" layoutX="228.0" layoutY="335.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Unassgined" />
             <Button layoutX="548.0" layoutY="482.0" mnemonicParsing="false" onAction="#clearSelection" text="Clear Selection" />
-            <Button fx:id="deleteButton" layoutX="570.0" layoutY="431.0" mnemonicParsing="false" text="Delete" />
+            <Button fx:id="deleteButton" layoutX="570.0" layoutY="431.0" mnemonicParsing="false" onAction="#deleteCustomer" text="Delete" />
+            <Label layoutX="56.0" layoutY="456.0" text="Country:" />
+            <Label layoutX="259.0" layoutY="456.0" text="State/Province:" />
+            <ComboBox fx:id="countCB" layoutX="123.0" layoutY="452.0" prefHeight="25.0" prefWidth="114.0" />
+            <ComboBox fx:id="fdCB" layoutX="347.0" layoutY="452.0" prefHeight="25.0" prefWidth="103.0" />
     </children>
 
     </AnchorPane>

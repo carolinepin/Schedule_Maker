@@ -16,10 +16,7 @@ import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
+import javafx.scene.control.*;
 
 public class ViewAppointments implements Initializable {
 
@@ -68,6 +65,52 @@ public class ViewAppointments implements Initializable {
     private TableColumn<Appointment, Integer> CustomerID;
     @FXML
     private TableColumn<Appointment, Integer> ContactID;
+
+    @FXML
+    private Button addButton;
+
+    @FXML
+    private Label appIDTB;
+
+
+    @FXML
+    private Button clearButton;
+
+    @FXML
+    private ComboBox<String> contactCB;
+
+    @FXML
+    private ComboBox<String> customerCB;
+
+    @FXML
+    private DatePicker datePicker;
+
+    @FXML
+    private Button deleteButton;
+
+    @FXML
+    private TextField descTB;
+
+    @FXML
+    private ComboBox<String> endCB;
+
+    @FXML
+    private TextField locTB;
+
+    @FXML
+    private ComboBox<String> startCB;
+
+    @FXML
+    private TextField titleTB;
+
+    @FXML
+    private TextField typeTB;
+
+    @FXML
+    private Button updateButton;
+
+    @FXML
+    private ComboBox<?> userTB;
 
 
     ObservableList<Appointment> appointmentList = DBAppointments.getAllAppointments();

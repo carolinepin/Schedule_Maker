@@ -37,6 +37,7 @@ public class DBUtils {
                 stage.setTitle(title);
                 stage.setScene(new Scene(root, 600, 400));
 
+
                 stage.show();
 
             }else {
@@ -48,13 +49,14 @@ public class DBUtils {
             }
 
 
-        } catch (IOException e) {
+        } catch (IOException | SQLException e) {
             e.printStackTrace();
         }
     }
 
 
-    public static void logginUser(ActionEvent event, String username, String password) throws SQLException {
+    public static int logginUser(ActionEvent event, String username, String password) throws SQLException {
+        int success = 0;
         String sql = "SELECT Password FROM USERS WHERE User_Name = ? ";
         PreparedStatement ps = JDBC.getConnection().prepareStatement(sql);
         ps.setString(1, username);
@@ -73,6 +75,7 @@ public class DBUtils {
                     System.out.println("Successful Login");
                     //System.out.println("IS THIS USERNAME NULL" + username);
                     DBUtils.changeScene(event, "loggedin.fxml", "Login Screen", username, "TEST DISPLAY");
+                    success = 1;
                 } else {
                     System.out.println("Tried " + username + " " + password);
                     System.out.println("Incorrect Password");
@@ -83,7 +86,16 @@ public class DBUtils {
                 }
             }while(rs.next());
         }
+        return 1;
 
+    }
+//NOT READY AT ALL
+    public static String divisionID2Division(int divID) throws SQLException {
+        String sql = "SELECT Division FROM first_level_divisions WHERE Division_ID = ? ";
+        PreparedStatement ps = JDBC.getConnection().prepareStatement(sql);
+        ps.setInt(1, divID);
+        ResultSet rs = ps.executeQuery();
+        return "IDK";
     }
 
 

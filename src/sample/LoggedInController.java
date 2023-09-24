@@ -1,6 +1,7 @@
 package sample;
 
 
+import DBAccess.DBAppointments;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
@@ -9,6 +10,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 
 import java.net.URL;
+import java.sql.SQLException;
 import java.util.ResourceBundle;
 
 public class LoggedInController implements Initializable {
@@ -37,10 +39,10 @@ public class LoggedInController implements Initializable {
 
     }
 
-    public void setUserInformation(String username, String appointment){
+    public void setUserInformation(String username, String appointment) throws SQLException {
 
         label_welcome.setText("Welcome " + username + "!");
-        next_appointment.setText("Your next appointment is at " +appointment);
+        next_appointment.setText(DBAppointments.getNextAppointment());
     }
 
 }

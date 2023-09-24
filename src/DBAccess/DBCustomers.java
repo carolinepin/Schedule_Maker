@@ -3,6 +3,7 @@ package DBAccess;
 import Models.Country;
 import Models.Customer;
 import helper.JDBC;
+import helper.timeZoneTranslator;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
@@ -32,11 +33,14 @@ public class DBCustomers {
                String PostalCode = rs.getString("Postal_Code");
                String phone = rs.getString("Phone");
                LocalDateTime CreatedDate = rs.getObject("Create_Date", LocalDateTime.class );
+               CreatedDate = timeZoneTranslator.fromUTC(CreatedDate);
                String CreatedBy = rs.getString("Created_By");
                LocalDateTime UpdatedOn = rs.getObject("Last_Update", LocalDateTime.class );
+               UpdatedOn = timeZoneTranslator.fromUTC(UpdatedOn);
                String UpdatedBy = rs.getString("Last_Updated_By");
+               int divisionID = rs.getInt("Division_ID");
 
-               Customer C = new Customer(countryID, customerName, address, PostalCode, phone,CreatedDate, CreatedBy, UpdatedOn, UpdatedBy);                 //make a Country Object from the id and name
+               Customer C = new Customer(countryID, customerName, address, PostalCode, phone,CreatedDate, CreatedBy, UpdatedOn, UpdatedBy, divisionID);                 //make a Country Object from the id and name
                clist.add(C);                                                    //add it to the list
 
            }
@@ -59,16 +63,49 @@ public class DBCustomers {
         ZonedDateTime utcZDT = ZonedDateTime.ofInstant(myZDT.toInstant(), utcZoneId);
 
 
+
         ps.setString(1, Name);
         ps.setString(2, Addr);
         ps.setString(3, Postal);
         ps.setString(4, Phone);
-        ps.setObject(5, utcZDT);
-        ps.setString(6, "admin");  //NEED TO CHANGE, MUST ACCEPT USERNAME IN ARGUMENT TO ADD HERE
+        ps.setObject(5, utcZDT.toLocalDateTime());
+        ps.setString(6, helper.userComputerInfo.getInstance(null,false).getUsername());
         ps.setInt(7, custID);
         int rowsAffected = ps.executeUpdate();
         return rowsAffected;
 
     }
 
+    public static int add( String Name, String Addr, String Postal, String Phone) throws SQLException {
+        String sql = "INSERT CUSTOMERS (Customer_Name, Address, Postal_Code, Phone, Create_Date, Created_By, Last_Update, Last_Updated_By, Division_ID) VALUES(?,?,?,?,?,?,?,?,29)";
+        PreparedStatement ps = JDBC.getConnection().prepareStatement(sql);
+        LocalDateTime timestamp = LocalDateTime.now();
+        ZoneId utcZoneId = ZoneId.of("UTC");
+        ZoneId myZoneId = ZoneId.systemDefault();
+        ZonedDateTime myZDT = ZonedDateTime.of(timestamp, myZoneId);
+        ZonedDateTime utcZDT = ZonedDateTime.ofInstant(myZDT.toInstant(), utcZoneId);
+
+
+
+        ps.setString(1, Name);
+        ps.setString(2, Addr);
+        ps.setString(3, Postal);
+        ps.setString(4, Phone);
+        ps.setObject(5, utcZDT.toLocalDateTime());
+        ps.setString(6, helper.userComputerInfo.getInstance(null,false).getUsername());
+        ps.setObject(7, utcZDT.toLocalDateTime());
+        ps.setString(8, helper.userComputerInfo.getInstance(null,false).getUsername());
+
+        int rowsAffected = ps.executeUpdate();
+        return rowsAffected;
+    }
+
+    public static int delete(int customerID) throws SQLException {
+        String sql = "DELETE FROM CUSTOMERS WHERE Customer_ID = ?";
+        PreparedStatement ps = JDBC.getConnection().prepareStatement(sql);
+        ps.setInt(1,customerID);
+        int rowsAffected = ps.executeUpdate();
+        return rowsAffected;
+
+    }
 }

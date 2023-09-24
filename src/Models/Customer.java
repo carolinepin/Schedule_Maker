@@ -12,9 +12,10 @@ public class Customer {
     private String CreatedBy;
     private LocalDateTime UpdatedAt;
     private String UpdatedBy;
+    private int divisionID;
 
     public Customer(int id, String name, String add, String zip, String phone, LocalDateTime ct, String cb,
-                    LocalDateTime ut, String ub){
+                    LocalDateTime ut, String ub, int divisionID){
         this.Customer_ID = id;
         this.Name = name;
         this.Address = add;
@@ -24,6 +25,7 @@ public class Customer {
         this.CreatedBy = cb;
         this.UpdatedAt = ut;
         this.UpdatedBy = ub;
+        this.divisionID = divisionID;
 
     }
 
@@ -36,6 +38,7 @@ public class Customer {
     public String getCreatedBy(){return CreatedBy;};
     public LocalDateTime getUT(){return UpdatedAt;};
     public String getUpdatedBy(){return UpdatedBy;};
+    public int getDivisionID() {return divisionID;}
 
 
 

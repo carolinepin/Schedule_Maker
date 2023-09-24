@@ -1,35 +1,66 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.*?>
-<?import java.util.*?>
-<?import javafx.scene.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
 
-<AnchorPane xmlns="http://javafx.com/javafx"
-            xmlns:fx="http://javafx.com/fxml"
-            fx:controller="sample.ViewAppointments"
-            prefHeight="400.0" prefWidth="600.0">
+<HBox maxHeight="570.0" maxWidth="840.0" minHeight="570.0" minWidth="840.0" prefHeight="572.0" prefWidth="841.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.ViewAppointments">
+
+<AnchorPane prefHeight="570.0" prefWidth="691.0">
 
     <children>
-        <TableView fx:id="appointmentTable" layoutX="26.0" layoutY="6.0" prefHeight="259.0" prefWidth="358.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+        <TableView fx:id="appointmentTable" layoutX="26.0" layoutY="6.0" prefHeight="270.0" prefWidth="691.0" AnchorPane.bottomAnchor="300.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
             <columns>
-                <TableColumn fx:id="AppointmentID" prefWidth="75.0" text="Appointment ID" />
-                <TableColumn fx:id="Title" prefWidth="75.0" text="Title" />
+                <TableColumn fx:id="AppointmentID" prefWidth="103.0" text="Appointment ID" />
+                <TableColumn fx:id="Title" prefWidth="47.0" text="Title" />
                 <TableColumn fx:id="Description" prefWidth="75.0" text="Description" />
                 <TableColumn fx:id="Location" prefWidth="75.0" text="Location" />
-                <TableColumn fx:id="Type" prefWidth="75.0" text="Type" />
-                <TableColumn fx:id="Start" prefWidth="75.0" text="Start" />
-                <TableColumn fx:id="End" prefWidth="75.0" text="End" />
+                <TableColumn fx:id="Type" prefWidth="97.0" text="Type" />
+                <TableColumn fx:id="Start" prefWidth="59.0" text="Start" />
+                <TableColumn fx:id="End" prefWidth="69.0" text="End" />
                 <TableColumn fx:id="CreatedDate" prefWidth="75.0" text="Created On" />
                 <TableColumn fx:id="CreatedBy" prefWidth="75.0" text="Created By" />
                 <TableColumn fx:id="UpdatedDate" prefWidth="75.0" text="Updated On" />
                 <TableColumn fx:id="UpdatedBy" prefWidth="75.0" text="Updated By" />
-                <TableColumn fx:id= "CustomerID" prefWidth="75.0" text="Customer ID" />
+                <TableColumn fx:id="CustomerID" prefWidth="75.0" text="Customer ID" />
                 <TableColumn fx:id="UserID" prefWidth="75.0" text="User ID" />
                 <TableColumn fx:id="ContactID" prefWidth="75.0" text="Contact ID" />
             </columns>
         </TableView>
+         <Label layoutX="20.0" layoutY="411.0" prefHeight="17.0" prefWidth="62.0" text="Location:" />
+         <Label layoutX="20.0" layoutY="376.0" prefHeight="17.0" prefWidth="118.0" text="Description:" />
+         <Label layoutX="28.0" layoutY="337.0" prefHeight="17.0" prefWidth="62.0" text="Title:" />
+         <Button fx:id="addButton" layoutX="587.0" layoutY="334.0" mnemonicParsing="false" text="Add" />
+         <Label layoutX="28.0" layoutY="298.0" prefHeight="17.0" prefWidth="91.0" text="AppointmentID:" />
+         <Label layoutX="20.0" layoutY="447.0" prefHeight="17.0" prefWidth="51.0" text="Type: " />
+         <Label layoutX="20.0" layoutY="486.0" prefHeight="17.0" prefWidth="51.0" text="Date: " />
+         <DatePicker fx:id="datePicker" layoutX="93.0" layoutY="482.0" />
+         <Button fx:id="updateButton" layoutX="578.0" layoutY="399.0" mnemonicParsing="false" text="Update" />
+         <Button fx:id="deleteButton" layoutX="580.0" layoutY="456.0" mnemonicParsing="false" text="Delete" />
+         <Label fx:id="appIDTB" layoutX="149.0" layoutY="298.0" text="Unassigned" />
+         <TextField fx:id="titleTB" layoutX="102.0" layoutY="333.0" />
+         <TextField fx:id="descTB" layoutX="102.0" layoutY="372.0" />
+         <TextField fx:id="locTB" layoutX="102.0" layoutY="407.0" />
+         <TextField fx:id="typeTB" layoutX="102.0" layoutY="443.0" />
+         <Button fx:id="clearButton" layoutX="558.0" layoutY="510.0" mnemonicParsing="false" text="Clear Selection" />
+         <ComboBox fx:id="startCB" layoutX="369.0" layoutY="482.0" prefWidth="150.0" />
+         <ComboBox fx:id="endCB" layoutX="369.0" layoutY="522.0" prefWidth="150.0" />
+         <Label layoutX="322.0" layoutY="486.0" text="Start" />
+         <Label layoutX="322.0" layoutY="526.0" text="End" />
+         <Label layoutX="284.0" layoutY="338.0" prefHeight="17.0" prefWidth="76.0" text="Customer:" />
+         <ComboBox fx:id="contactCB" layoutX="369.0" layoutY="407.0" prefWidth="150.0" />
+         <ComboBox fx:id="userTB" layoutX="369.0" layoutY="372.0" prefWidth="150.0" />
+         <ComboBox fx:id="customerCB" layoutX="369.0" layoutY="334.0" prefWidth="150.0" />
+         <Label layoutX="284.0" layoutY="376.0" text="User: " />
+         <Label layoutX="284.0" layoutY="411.0" text="Contact: " />
+        
     </children>
 
 </AnchorPane>
+</HBox>

@@ -17,8 +17,8 @@ public class TimeZoneApp {
         ZoneId myZoneId = ZoneId.systemDefault();
         ZonedDateTime myZDT = ZonedDateTime.of(LDT, myZoneId);
         //System.out.println(myZDT);
-        //System.out.println(myZDT.toLocalDate());
-        //System.out.println(myZDT.toLocalTime());
+        System.out.println(myZDT.toLocalDate());
+        System.out.println(myZDT.toLocalTime());
         System.out.println("Usertime = " + myZDT.toLocalDate().toString() + " " + myZDT.toLocalTime().toString()); //now ready for SQL because string
 
         //CONVERT LOCAL TIME TO UTC

@@ -24,6 +24,7 @@ public class ViewCustomer implements Initializable {
     @FXML
     private Button appointButton;
 
+
     @FXML
     private TableView<Customer> customerTable;
 
@@ -82,7 +83,14 @@ public class ViewCustomer implements Initializable {
     @FXML
     private Button deleteButton;
 
+    @FXML
+    private ComboBox<String> fdCB;
+
+    @FXML
+    private ComboBox<?> countCB;
+
     private int index;
+    private String username;
 
 
 
@@ -177,6 +185,29 @@ public class ViewCustomer implements Initializable {
     void updateCustomer(ActionEvent event) throws SQLException {
         int ra = DBCustomers.update(custID.getCellData(index), nameField.getText(),
                 adrField.getText(), postField.getText(), phoneField.getText());
+        System.out.println("Updated these many lines" + ra);
+
+        customerList = DBCustomers.getAllCustomers();
+        customerTable.getItems().clear();
+        customerTable.getItems().addAll(customerList);
+
+
+    }
+    @FXML
+    void addCustomer(ActionEvent event) throws SQLException {
+        int ra = DBCustomers.add(nameField.getText(),
+                adrField.getText(), postField.getText(), phoneField.getText());
+        System.out.println("Updated these many lines" + ra);
+
+        customerList = DBCustomers.getAllCustomers();
+        customerTable.getItems().clear();
+        customerTable.getItems().addAll(customerList);
+
+
+    }
+    @FXML
+    void deleteCustomer(ActionEvent event) throws SQLException {
+        int ra = DBCustomers.delete(custID.getCellData(index));
         System.out.println("Updated these many lines" + ra);
 
         customerList = DBCustomers.getAllCustomers();

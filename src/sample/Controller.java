@@ -2,7 +2,11 @@ package sample;
 
 import java.net.URL;
 import java.sql.SQLException;
+import java.time.LocalDateTime;
+import java.time.ZoneId;
+import java.time.ZonedDateTime;
 import java.util.ResourceBundle;
+import helper.userComputerInfo;
 
 import DBAccess.DBCountries;
 import Models.Country;
@@ -12,11 +16,8 @@ import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.event.ActionEvent;
-import javafx.scene.control.Button;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
-import javafx.scene.control.TextField;
-import org.w3c.dom.Text;
+import javafx.scene.control.*;
+
 
 public class Controller implements Initializable {
 
@@ -32,11 +33,18 @@ public class Controller implements Initializable {
     @FXML
     private TextField tf_password;
 
+    @FXML
+    private Label userTimeZone;
+
+
+
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle){
+        ZoneId userZone = ZoneId.systemDefault();
 
-
+        userTimeZone.setText(userZone.toString());
+        //ResourceBundle myBundle = ResourceBundle.getBundle("lang");
 
         button_loggin.setOnAction(new EventHandler<ActionEvent>() {
 
@@ -44,7 +52,10 @@ public class Controller implements Initializable {
             public void handle(ActionEvent event) {
                 try {
                     System.out.println(tf_username.getText());
-                    DBUtils.logginUser(event, tf_username.getText(), tf_password.getText());   //go back to login page
+                    int setData = DBUtils.logginUser(event, tf_username.getText(), tf_password.getText());   //go to login page
+                    if (setData == 1) {   //if login was successful
+                        userComputerInfo user = userComputerInfo.getInstance(tf_username.getText(), true);
+                    }
                 } catch (SQLException throwables) {
                     throwables.printStackTrace();
                 }
