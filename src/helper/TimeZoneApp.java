@@ -7,7 +7,7 @@ public class TimeZoneApp {
 
     public static void main(String[] args){
 
-        //ZoneId.getAvailableZoneIds().stream().sorted().forEach(System.out::println); //NEAT WAY TO LOOP
+        ZoneId.getAvailableZoneIds().stream().sorted().forEach(System.out::println); //NEAT WAY TO LOOP
         //System.out.println(ZoneId.systemDefault());
         LocalDate myLD = LocalDate.of(2023,9,16);
         LocalTime myLT = LocalTime.of(23,55,0);

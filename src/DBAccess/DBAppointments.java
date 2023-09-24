@@ -12,6 +12,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.time.LocalDateTime;
 import java.time.ZoneId;
+import java.time.ZonedDateTime;
 
 import helper.userComputerInfo;
 
@@ -63,7 +64,9 @@ public class DBAppointments {
                 String location = rs.getString("Location");
                 String type = rs.getString("Type");
                 LocalDateTime start = rs.getObject("Start", LocalDateTime.class );
+                start = timeZoneTranslator.fromUTC(start);
                 LocalDateTime end = rs.getObject("End", LocalDateTime.class );
+                end = timeZoneTranslator.fromUTC(end);
                 LocalDateTime CreatedDate = rs.getObject("Create_Date", LocalDateTime.class );
                 CreatedDate = timeZoneTranslator.fromUTC(CreatedDate);
                 String CreatedBy = rs.getString("Created_By");
@@ -87,4 +90,53 @@ public class DBAppointments {
 
         return alist;
     }
+
+    public static int update(int appID, String title, String desc, String location, String type,
+                             LocalDateTime Start, LocalDateTime End, int custID, int userID, int contactID) throws SQLException {
+        String sql = "UPDATE appointments SET Title = ?, Description = ? , Location = ? , Type = ? , Last_Update = ?, Last_Updated_By = ?, " +
+                "Start = ?, End = ?, Customer_ID = ?, User_ID = ?, Contact_ID = ? WHERE Appointment_ID = ?";
+        PreparedStatement ps = JDBC.getConnection().prepareStatement(sql);
+        LocalDateTime timestamp = LocalDateTime.now();
+        ZoneId utcZoneId = ZoneId.of("UTC");
+        ZoneId myZoneId = ZoneId.systemDefault();
+        ZonedDateTime myZDT = ZonedDateTime.of(timestamp, myZoneId);
+        ZonedDateTime utcZDT = ZonedDateTime.ofInstant(myZDT.toInstant(), utcZoneId);
+
+        ps.setString(1, title);
+        ps.setString(2, desc);
+        ps.setString(3, location);
+        ps.setString(4, type);
+        ps.setObject(5, utcZDT.toLocalDateTime());
+        ps.setString(6, helper.userComputerInfo.getInstance(null,false).getUsername());
+        ps.setObject(7, timeZoneTranslator.toUTC(Start));
+        ps.setObject(8, timeZoneTranslator.toUTC(End));
+        ps.setInt(9,custID);
+        ps.setInt(10,userID);
+        ps.setInt(11, contactID);
+        ps.setInt(12, appID);
+
+        int rowsAffected = ps.executeUpdate();
+        return rowsAffected;
+
+    }
+
+    public static boolean timeOverlap(LocalDateTime time) throws SQLException {
+        boolean overlap = false;
+        String sql = "SELECT * from Appointments";                  //SQL query to be sent
+        PreparedStatement ps = JDBC.getConnection().prepareStatement(sql);    //change command from string to Query & send it
+        ResultSet rs = ps.executeQuery();
+        while (rs.next()){ //while list of countries is not empty, move to the next country and perform the following
+            LocalDateTime start = rs.getObject("Start", LocalDateTime.class );
+            start = timeZoneTranslator.fromUTC(start);
+            LocalDateTime end = rs.getObject("End", LocalDateTime.class );
+            end = timeZoneTranslator.fromUTC(end);
+            if (time.isAfter(start) && time.isBefore(end)){
+                return overlap = true;
+            }
+
+        }
+
+        return overlap;
+    }
+
 }

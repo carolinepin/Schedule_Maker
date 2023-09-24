@@ -107,7 +107,7 @@ public class ViewCustomer implements Initializable {
     private Label divIDLabel;
 
     private int index;
-    private String username;
+
 
 
 
