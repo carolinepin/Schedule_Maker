@@ -35,7 +35,7 @@ public class DBUtils {
 
                 Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
                 stage.setTitle(title);
-                stage.setScene(new Scene(root, 600, 400));
+                stage.setScene(new Scene(root));
 
 
                 stage.show();
@@ -44,7 +44,8 @@ public class DBUtils {
 
                 Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
                 stage.setTitle(title);
-                stage.setScene(new Scene(root, 600, 400));
+                stage.setScene(new Scene(root));
+                stage.setResizable(false);
                 stage.show();
             }
 
@@ -89,14 +90,7 @@ public class DBUtils {
         return 1;
 
     }
-//NOT READY AT ALL
-    public static String divisionID2Division(int divID) throws SQLException {
-        String sql = "SELECT Division FROM first_level_divisions WHERE Division_ID = ? ";
-        PreparedStatement ps = JDBC.getConnection().prepareStatement(sql);
-        ps.setInt(1, divID);
-        ResultSet rs = ps.executeQuery();
-        return "IDK";
-    }
+
 
 
 }

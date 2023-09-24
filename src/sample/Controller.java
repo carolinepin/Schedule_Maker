@@ -2,13 +2,11 @@ package sample;
 
 import java.net.URL;
 import java.sql.SQLException;
-import java.time.LocalDateTime;
 import java.time.ZoneId;
-import java.time.ZonedDateTime;
 import java.util.ResourceBundle;
 import helper.userComputerInfo;
 
-import DBAccess.DBCountries;
+import DBAccess.DBCountriesAndFD;
 import Models.Country;
 
 import javafx.collections.ObservableList;
@@ -64,13 +62,16 @@ public class Controller implements Initializable {
             }
         });
     }
-
+/*
+OLD TEST CODE to see all countries. It was my first Observable list and holds sentimental value
     public void showMe(ActionEvent actionEvent)
     {
-        ObservableList<Country> countrylist = DBCountries.getAllCountries();
+        ObservableList<Country> countrylist = DBCountriesAndFD.getAllCountries();
         for (Country C : countrylist){
             System.out.println("Country ID: "+ C.getID() + " Name: " + C.getName());
         }
     }
+
+ */
 
 }

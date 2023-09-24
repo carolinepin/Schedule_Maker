@@ -53,8 +53,10 @@ public class DBCustomers {
         return clist;
     }
 
-    public static int update(int custID, String Name, String Addr, String Postal, String Phone) throws SQLException {
-        String sql = "UPDATE CUSTOMERS SET Customer_Name = ?, Address = ? , Postal_Code = ? , Phone = ? , Last_Update = ?, Last_Updated_By = ? WHERE Customer_ID = ?";
+
+
+    public static int update(int custID, String Name, String Addr, String Postal, String Phone, int div) throws SQLException {
+        String sql = "UPDATE CUSTOMERS SET Customer_Name = ?, Address = ? , Postal_Code = ? , Phone = ? , Last_Update = ?, Last_Updated_By = ?, Division_ID = ? WHERE Customer_ID = ?";
         PreparedStatement ps = JDBC.getConnection().prepareStatement(sql);
         LocalDateTime timestamp = LocalDateTime.now();
         ZoneId utcZoneId = ZoneId.of("UTC");
@@ -70,14 +72,15 @@ public class DBCustomers {
         ps.setString(4, Phone);
         ps.setObject(5, utcZDT.toLocalDateTime());
         ps.setString(6, helper.userComputerInfo.getInstance(null,false).getUsername());
-        ps.setInt(7, custID);
+        ps.setInt(7, div);
+        ps.setInt(8, custID);
         int rowsAffected = ps.executeUpdate();
         return rowsAffected;
 
     }
 
-    public static int add( String Name, String Addr, String Postal, String Phone) throws SQLException {
-        String sql = "INSERT CUSTOMERS (Customer_Name, Address, Postal_Code, Phone, Create_Date, Created_By, Last_Update, Last_Updated_By, Division_ID) VALUES(?,?,?,?,?,?,?,?,29)";
+    public static int add( String Name, String Addr, String Postal, String Phone, int divID) throws SQLException {
+        String sql = "INSERT CUSTOMERS (Customer_Name, Address, Postal_Code, Phone, Create_Date, Created_By, Last_Update, Last_Updated_By, Division_ID) VALUES(?,?,?,?,?,?,?,?,?)";
         PreparedStatement ps = JDBC.getConnection().prepareStatement(sql);
         LocalDateTime timestamp = LocalDateTime.now();
         ZoneId utcZoneId = ZoneId.of("UTC");
@@ -95,6 +98,7 @@ public class DBCustomers {
         ps.setString(6, helper.userComputerInfo.getInstance(null,false).getUsername());
         ps.setObject(7, utcZDT.toLocalDateTime());
         ps.setString(8, helper.userComputerInfo.getInstance(null,false).getUsername());
+        ps.setInt(9, divID);
 
         int rowsAffected = ps.executeUpdate();
         return rowsAffected;
